@@ -91,34 +91,34 @@
 
 <div class="container">
     <div id="confirmEntrySection">
-        <button id="confirmEntryBtn">GİRİŞİ ONAYLA</button>
+        <button id="confirmEntryBtn">Enter Game</button>
     </div>
     <div id="countdownSection" class="hidden">
         <span id="countdownTimer">5</span> Oyun Başlıyor...
     </div>
     <div id="startGameSection">
-        <button id="startGameBtn">Oyuna Başla</button>
+        <button id="startGameBtn">Start Game</button>
     </div>
     <div id="difficultySection" class="hidden">
-        <button id="easyBtn">Kolay Seviye</button>
-        <button id="hardBtn">Zor Seviye</button>
+        <button id="easyBtn">Easy Level</button>
+        <button id="hardBtn">Hard Level</button>
     </div>
     <div id="enterNameSection" class="hidden">
         <input type="text" id="userName" placeholder="İsminizi Girin">
-        <button id="submitNameBtn">Gönder</button>
+        <button id="submitNameBtn">Submit Name</button>
     </div>
     <div id="countdownSection" class="hidden">
-        <span id="countdownTimer">7</span> saniye kaldı...
+        <span id="countdownTimer">7</span> seconds left...
     </div>   
     <div id="gameStartingSection" class="hidden"> 
-        <div>OYUN BAŞLIYOR</div>
+        <div>Game Starting</div>
         <div id="countdownTimer" class="countdown"></div> 
-        <div>saniye kaldı...</div>
+        <div>seconds left...</div>
     </div>
     <div id="enterResponseSection" class="hidden">
         <div id="questionText" style="font-size: 20px; margin-bottom: 20px;">Soru metni burada gösterilecek</div>
         <input type="text" id="userResponse" placeholder="Cevabınızı Girin">
-        <button id="submitResponseBtn">Gönder</button>
+        <button id="submitResponseBtn">Submit Answer</button>
         <button id="hintBtn">İpucu Göster</button>
         <div id="hintContainer" class="hidden">
             <button id="returnToQuestionBtn" class="hidden">İpucunu Kapat</button>
@@ -132,33 +132,33 @@
     </div>    
     <div id="actionButtonsSection" class="hidden">
         <div id="feedbackText" style="font-size: 20px; color: green; margin-bottom: 20px;"></div>
-        <button id="continueBtn">Devam Et</button>
+        <button id="continueBtn">Continue Game</button>
         <button id="listenBtn">Sesli Dinle</button>
     </div>
 </div>
 
 <div id="endGameSection" class="container hidden">
-    <div class="endMessage">Oyun Bitti, Oynadığınız İçin Teşekkürler!</div>
-    <button id="returnToHomeBtn">Ana Sayfaya Dön</button>
+    <div class="endMessage">Game End,Thank you for playing...</div>
+    <button id="returnToHomeBtn">Return To Main Page</button>
 </div>
 
 <script>
     const easyData2 = [
-        { question: "I like pizza.", answer: "So do I",hintSrc: "images/0.png",audioSrc: "audio/kolay1.mp3"},
-        { question: "She can speak Spanish", answer: "So can I",hintSrc: "images/1.png",audioSrc: "audio/kolay2.mp3"},
-        { question: "They haven't visited Europe", answer: "Neither have I",hintSrc: "images/2.png",audioSrc: "audio/kolay3.mp3" },
-        { question: "He enjoys playing tennis", answer: "So do I",hintSrc: "images/3.png" ,audioSrc: "audio/kolay4.mp3"},
-        { question: "We won't be going to the party", answer: "Neither will I" ,hintSrc: "images/4.png",audioSrc: "audio/kolay5.mp3"},
-        { question: "She has never ridden a horse", answer: "Neither have I" ,hintSrc: "images/5.png",audioSrc: "audio/kolay6.mp3"},
-        { question: "He didn't watch the movie", answer: "Neither did I",hintSrc: "images/6.png" ,audioSrc: "audio/kolay7.mp3"},
-        { question: "They don't like spicy food", answer: "Neither do I",hintSrc: "images/7.png" ,audioSrc: "audio/kolay8.mp3"},
-        { question: "We didn't go swimming yesterday", answer: "Neither did I" ,hintSrc: "images/8.png",audioSrc: "audio/kolay9.mp3"},
-        { question: "He hasn't finished his homework yet", answer: "Neither have I" ,hintSrc: "images/9.png",audioSrc: "audio/kolay10.mp3"},
-        { question: "She can play the piano", answer: "So can I" ,hintSrc: "images/10.png",audioSrc: "audio/kolay11.mp3"},
-        { question: "They aren't attending the conference", answer: " Neither am I" ,hintSrc: "images/11.png",audioSrc: "audio/kolay12.mp3"},
-        { question: "I haven't read that book", answer: "Neither have I",hintSrc: "images/12.png" ,audioSrc: "audio/kolay13.mp3"},
-        { question: "He didn't enjoy the concert", answer: "Neither did I",hintSrc: "images/13.png",audioSrc: "audio/kolay14.mp3" },
-        { question: "We won't be joining the club", answer: "Neither will I",hintSrc: "images/14.png" ,audioSrc: "audio/kolay15.mp3"}
+        { question: "I like pizza. (Bende severim)", answer: "So do I",hintSrc: "images/0.png",audioSrc: "audio/kolay1.mp3"},
+        { question: "She can speak Spanish (Bende konuşabilirim)", answer: "So can I",hintSrc: "images/1.png",audioSrc: "audio/kolay2.mp3"},
+        { question: "They haven't visited Europe (Bende ziyaret etmedim)", answer: "Neither have I",hintSrc: "images/2.png",audioSrc: "audio/kolay3.mp3" },
+        { question: "He enjoys playing tennis (Bende oynarım)", answer: "So do I",hintSrc: "images/3.png" ,audioSrc: "audio/kolay4.mp3"},
+        { question: "We won't be going to the party (Bende gitmeyeceğim)", answer: "Neither will I" ,hintSrc: "images/4.png",audioSrc: "audio/kolay5.mp3"},
+        { question: "She has never ridden a horse (Bende sürmedim)", answer: "Neither have I" ,hintSrc: "images/5.png",audioSrc: "audio/kolay6.mp3"},
+        { question: "He didn't watch the movie (Bende izlemedim)", answer: "Neither did I",hintSrc: "images/6.png" ,audioSrc: "audio/kolay7.mp3"},
+        { question: "They don't like spicy food (Bende sevmem)", answer: "Neither do I",hintSrc: "images/7.png" ,audioSrc: "audio/kolay8.mp3"},
+        { question: "We didn't go swimming yesterday (Bende yüzmem)", answer: "Neither did I" ,hintSrc: "images/8.png",audioSrc: "audio/kolay9.mp3"},
+        { question: "He hasn't finished his homework yet (Bende bitirmedim)", answer: "Neither have I" ,hintSrc: "images/9.png",audioSrc: "audio/kolay10.mp3"},
+        { question: "She can play the piano (Bende çalarım)", answer: "So can I" ,hintSrc: "images/10.png",audioSrc: "audio/kolay11.mp3"},
+        { question: "They aren't attending the conference (Bende katılmadım)", answer: " Neither am I" ,hintSrc: "images/11.png",audioSrc: "audio/kolay12.mp3"},
+        { question: "I haven't read that book (Bende okumadım)", answer: "Neither have I",hintSrc: "images/12.png" ,audioSrc: "audio/kolay13.mp3"},
+        { question: "He didn't enjoy the concert (Bende eğlenmedim)", answer: "Neither did I",hintSrc: "images/13.png",audioSrc: "audio/kolay14.mp3" },
+        { question: "We won't be joining the club (Bende katılmadım)", answer: "Neither will I",hintSrc: "images/14.png" ,audioSrc: "audio/kolay15.mp3"}
     ];
 
     const hardData2 = [
