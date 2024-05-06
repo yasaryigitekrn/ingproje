@@ -94,7 +94,7 @@
         <button id="confirmEntryBtn">Enter Game</button>
     </div>
     <div id="countdownSection" class="hidden">
-        <span id="countdownTimer">5</span> Oyun Başlıyor...
+        <span id="countdownTimer">5</span> Game Starting...
     </div>
     <div id="startGameSection">
         <button id="startGameBtn">Start Game</button>
@@ -104,14 +104,14 @@
         <button id="hardBtn">Hard Level</button>
     </div>
     <div id="enterNameSection" class="hidden">
-        <input type="text" id="userName" placeholder="İsminizi Girin">
+        <input type="text" id="userName" placeholder="Enter Your Name">
         <button id="submitNameBtn">Submit Name</button>
     </div>
     <div id="countdownSection" class="hidden">
         <span id="countdownTimer">7</span> seconds left...
     </div>   
     <div id="gameStartingSection" class="hidden"> 
-        <div>Game Starting</div>
+        <div>Game Starting...</div>
         <div id="countdownTimer" class="countdown"></div> 
         <div>seconds left...</div>
     </div>
@@ -143,22 +143,22 @@
 </div>
 
 <script>
-    const easyData2 = [
-        { question: "I like pizza. (Bende severim)", answer: "So do I",hintSrc: "images/0.png",audioSrc: "audio/kolay1.mp3"},
-        { question: "She can speak Spanish (Bende konuşabilirim)", answer: "So can I",hintSrc: "images/1.png",audioSrc: "audio/kolay2.mp3"},
-        { question: "They haven't visited Europe (Bende ziyaret etmedim)", answer: "Neither have I",hintSrc: "images/2.png",audioSrc: "audio/kolay3.mp3" },
-        { question: "He enjoys playing tennis (Bende oynarım)", answer: "So do I",hintSrc: "images/3.png" ,audioSrc: "audio/kolay4.mp3"},
-        { question: "We won't be going to the party (Bende gitmeyeceğim)", answer: "Neither will I" ,hintSrc: "images/4.png",audioSrc: "audio/kolay5.mp3"},
-        { question: "She has never ridden a horse (Bende sürmedim)", answer: "Neither have I" ,hintSrc: "images/5.png",audioSrc: "audio/kolay6.mp3"},
-        { question: "He didn't watch the movie (Bende izlemedim)", answer: "Neither did I",hintSrc: "images/6.png" ,audioSrc: "audio/kolay7.mp3"},
-        { question: "They don't like spicy food (Bende sevmem)", answer: "Neither do I",hintSrc: "images/7.png" ,audioSrc: "audio/kolay8.mp3"},
-        { question: "We didn't go swimming yesterday (Bende yüzmem)", answer: "Neither did I" ,hintSrc: "images/8.png",audioSrc: "audio/kolay9.mp3"},
-        { question: "He hasn't finished his homework yet (Bende bitirmedim)", answer: "Neither have I" ,hintSrc: "images/9.png",audioSrc: "audio/kolay10.mp3"},
-        { question: "She can play the piano (Bende çalarım)", answer: "So can I" ,hintSrc: "images/10.png",audioSrc: "audio/kolay11.mp3"},
-        { question: "They aren't attending the conference (Bende katılmadım)", answer: " Neither am I" ,hintSrc: "images/11.png",audioSrc: "audio/kolay12.mp3"},
-        { question: "I haven't read that book (Bende okumadım)", answer: "Neither have I",hintSrc: "images/12.png" ,audioSrc: "audio/kolay13.mp3"},
-        { question: "He didn't enjoy the concert (Bende eğlenmedim)", answer: "Neither did I",hintSrc: "images/13.png",audioSrc: "audio/kolay14.mp3" },
-        { question: "We won't be joining the club (Bende katılmadım)", answer: "Neither will I",hintSrc: "images/14.png" ,audioSrc: "audio/kolay15.mp3"}
+    const easyData = [
+        { question: "I like pizza. (Bende severim)", answer: "sodoı",hintSrc: "images/0.png",audioSrc: "audio/kolay1.mp3"},
+        { question: "She can speak Spanish (Bende konuşabilirim)", answer: "socanı",hintSrc: "images/1.png",audioSrc: "audio/kolay2.mp3"},
+        { question: "They haven't visited Europe (Bende ziyaret etmedim)", answer: "neitherhaveı",hintSrc: "images/2.png",audioSrc: "audio/kolay3.mp3" },
+        { question: "He enjoys playing tennis (Bende oynarım)", answer: "sodoı",hintSrc: "images/3.png" ,audioSrc: "audio/kolay4.mp3"},
+        { question: "We won't be going to the party (Bende gitmeyeceğim)", answer: "neitherwillı" ,hintSrc: "images/4.png",audioSrc: "audio/kolay5.mp3"},
+        { question: "She has never ridden a horse (Bende sürmedim)", answer: "neitherhaveı" ,hintSrc: "images/5.png",audioSrc: "audio/kolay6.mp3"},
+        { question: "He didn't watch the movie (Bende izlemedim)", answer: "neitherdidı",hintSrc: "images/6.png" ,audioSrc: "audio/kolay7.mp3"},
+        { question: "They don't like spicy food (Bende sevmem)", answer: "neitherdoı",hintSrc: "images/7.png" ,audioSrc: "audio/kolay8.mp3"},
+        { question: "We didn't go swimming yesterday (Bende yüzmem)", answer: "neitherdidı" ,hintSrc: "images/8.png",audioSrc: "audio/kolay9.mp3"},
+        { question: "He hasn't finished his homework yet (Bende bitirmedim)", answer: "neitherhaveı" ,hintSrc: "images/9.png",audioSrc: "audio/kolay10.mp3"},
+        { question: "She can play the piano (Bende çalarım)", answer: "socanı" ,hintSrc: "images/10.png",audioSrc: "audio/kolay11.mp3"},
+        { question: "They aren't attending the conference (Bende katılmadım)", answer: "neitheramı" ,hintSrc: "images/11.png",audioSrc: "audio/kolay12.mp3"},
+        { question: "I haven't read that book (Bende okumadım)", answer: "neitherhaveı",hintSrc: "images/12.png" ,audioSrc: "audio/kolay13.mp3"},
+        { question: "He didn't enjoy the concert (Bende eğlenmedim)", answer: "neitherdidı",hintSrc: "images/13.png",audioSrc: "audio/kolay14.mp3" },
+        { question: "We won't be joining the club (Bende katılmadım)", answer: "neitherwillı" ,hintSrc: "images/14.png" ,audioSrc: "audio/kolay15.mp3"}
     ];
 
     const hardData2 = [
@@ -172,26 +172,6 @@
         { question: "If the company _________ (invest) in new technology, they _________ (be) more competitive", answer: "had invested,would have been" ,hintSrc: "images/27.png" ,audioSrc: "audio/zor88.mp3"},
         { question: "If the rain _________ (not/stop), the match _________ (postpone)", answer: "had not stopped,would have been",hintSrc: "images/28.png"  ,audioSrc: "audio/zor9.mp3"}
     ];
-
-
-    const easyData = [
-        { question: "I like pizza.", answer: "sodoı",hintSrc: "images/0.png",audioSrc: "audio/kolay1.mp3"},
-        { question: "She can speak Spanish", answer: "socanı",hintSrc: "images/1.png",audioSrc: "audio/kolay2.mp3"},
-        { question: "They haven't visited Europe", answer: "neitherhaveı",hintSrc: "images/2.png",audioSrc: "audio/kolay3.mp3" },
-        { question: "He enjoys playing tennis", answer: "sodoı",hintSrc: "images/3.png" ,audioSrc: "audio/kolay4.mp3"},
-        { question: "We won't be going to the party", answer: "neitherwillı" ,hintSrc: "images/4.png",audioSrc: "audio/kolay5.mp3"},
-        { question: "She has never ridden a horse", answer: "neitherhaveı" ,hintSrc: "images/5.png",audioSrc: "audio/kolay6.mp3"},
-        { question: "He didn't watch the movie", answer: "neitherdidı",hintSrc: "images/6.png" ,audioSrc: "audio/kolay7.mp3"},
-        { question: "They don't like spicy food", answer: "neitherdoı",hintSrc: "images/7.png" ,audioSrc: "audio/kolay8.mp3"},
-        { question: "We didn't go swimming yesterday", answer: "neitherdidı" ,hintSrc: "images/8.png",audioSrc: "audio/kolay9.mp3"},
-        { question: "He hasn't finished his homework yet", answer: "neitherhaveı" ,hintSrc: "images/9.png",audioSrc: "audio/kolay10.mp3"},
-        { question: "She can play the piano", answer: "socanı" ,hintSrc: "images/10.png",audioSrc: "audio/kolay11.mp3"},
-        { question: "They aren't attending the conference", answer: "neitheramı" ,hintSrc: "images/11.png",audioSrc: "audio/kolay12.mp3"},
-        { question: "I haven't read that book", answer: "neitherhaveı",hintSrc: "images/12.png" ,audioSrc: "audio/kolay13.mp3"},
-        { question: "He didn't enjoy the concert", answer: "neitherdidı",hintSrc: "images/13.png",audioSrc: "audio/kolay14.mp3" },
-        { question: "We won't be joining the club", answer: "neitherwillı",hintSrc: "images/14.png" ,audioSrc: "audio/kolay15.mp3"}
-    ];
-
 
 
  const hardData = [
@@ -352,11 +332,11 @@ function stopAudio() {
         const correctAnswer = selectedData[currentQuestionIndex].answer.trim().toLowerCase(); // Doğru cevabı alın
         sendData(userResponse); // Cevabı sunucuya gönderin
         if (userResponse === correctAnswer) {
-            document.getElementById('feedbackText').textContent = "Doğru! Cevap : " +  selectedData[currentQuestionIndex].answer;
+            document.getElementById('feedbackText').textContent = "Correct! Answer : " +  selectedData[currentQuestionIndex].answer;
             document.getElementById('feedbackText').style.color = "green";
             responseCounter++;
         } else {
-            document.getElementById('feedbackText').textContent = "Yanlış! Doğru cevap: " + selectedData[currentQuestionIndex].answer;
+            document.getElementById('feedbackText').textContent = "Incorrect! Correct Answer : " + selectedData[currentQuestionIndex].answer;
             document.getElementById('feedbackText').style.color = "red";
         }
         currentQuestionIndex++;
