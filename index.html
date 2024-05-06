@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oyun</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f7f7f7;
+            margin: 0;
+            background-image: url('images/arka plan.png'); 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        input[type=text], button {
+            margin: 15px 0;
+            padding: 15px;
+            width: calc(100% - 30px);
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        input[type=text]:focus {
+            border-color: #007bff;
+        }
+        #hintImage {
+            width: 100%;
+            height: auto; 
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        } 
+        button:hover {
+            background-color: #0057b3;
+        }
+        #hintContainer img {
+            display: block;
+            margin: 10px auto;
+        }
+        .hidden {
+            display: none;
+        }
+        .endMessage {
+            font-size: 24px;
+            color: #333;
+            margin: 20px 0;
+        }
+        #gameStartingSection {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#gameStartingSection {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#gameStartingSection div {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.countdown {
+    color: #333; 
+    font-size: 24px; 
+}
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="confirmEntrySection">
+        <button id="confirmEntryBtn">GİRİŞİ ONAYLA</button>
+    </div>
+    <div id="countdownSection" class="hidden">
+        <span id="countdownTimer">5</span> Oyun Başlıyor...
+    </div>
+    <div id="startGameSection">
+        <button id="startGameBtn">Oyuna Başla</button>
+    </div>
+    <div id="difficultySection" class="hidden">
+        <button id="easyBtn">Kolay Seviye</button>
+        <button id="hardBtn">Zor Seviye</button>
+    </div>
+    <div id="enterNameSection" class="hidden">
+        <input type="text" id="userName" placeholder="İsminizi Girin">
+        <button id="submitNameBtn">Gönder</button>
+    </div>
+    <div id="countdownSection" class="hidden">
+        <span id="countdownTimer">7</span> saniye kaldı...
+    </div>   
+    <div id="gameStartingSection" class="hidden"> 
+        <div>OYUN BAŞLIYOR</div>
+        <div id="countdownTimer" class="countdown"></div> 
+        <div>saniye kaldı...</div>
+    </div>
+    <div id="enterResponseSection" class="hidden">
+        <div id="questionText" style="font-size: 20px; margin-bottom: 20px;">Soru metni burada gösterilecek</div>
+        <input type="text" id="userResponse" placeholder="Cevabınızı Girin">
+        <button id="submitResponseBtn">Gönder</button>
+        <button id="hintBtn">İpucu Göster</button>
+        <div id="hintContainer" class="hidden">
+            <button id="returnToQuestionBtn" class="hidden">İpucunu Kapat</button>
+            <img id="hintImage" src="" alt="İpucu Resmi" style="max-width: 100%; height: auto;">
+        </div>
+    </div>    
+    <div id="hintScreen" class="hidden">
+        <h2>İpucu</h2>
+        <img id="hintImage" src="" alt="İpucu Resmi" style="max-width: 100%; max-height: 400px;">
+        <button id="closeHintBtn">İpucunu Kapat</button>
+    </div>    
+    <div id="actionButtonsSection" class="hidden">
+        <div id="feedbackText" style="font-size: 20px; color: green; margin-bottom: 20px;"></div>
+        <button id="continueBtn">Devam Et</button>
+        <button id="listenBtn">Sesli Dinle</button>
+    </div>
+</div>
+
+<div id="endGameSection" class="container hidden">
+    <div class="endMessage">Oyun Bitti, Oynadığınız İçin Teşekkürler!</div>
+    <button id="returnToHomeBtn">Ana Sayfaya Dön</button>
+</div>
+
+<script>
+    const easyData2 = [
+        { question: "I like pizza.", answer: "So do I",hintSrc: "images/0.png",audioSrc: "audio/kolay1.mp3"},
+        { question: "She can speak Spanish", answer: "So can I",hintSrc: "images/1.png",audioSrc: "audio/kolay2.mp3"},
+        { question: "They haven't visited Europe", answer: "Neither have I",hintSrc: "images/2.png",audioSrc: "audio/kolay3.mp3" },
+        { question: "He enjoys playing tennis", answer: "So do I",hintSrc: "images/3.png" ,audioSrc: "audio/kolay4.mp3"},
+        { question: "We won't be going to the party", answer: "Neither will I" ,hintSrc: "images/4.png",audioSrc: "audio/kolay5.mp3"},
+        { question: "She has never ridden a horse", answer: "Neither have I" ,hintSrc: "images/5.png",audioSrc: "audio/kolay6.mp3"},
+        { question: "He didn't watch the movie", answer: "Neither did I",hintSrc: "images/6.png" ,audioSrc: "audio/kolay7.mp3"},
+        { question: "They don't like spicy food", answer: "Neither do I",hintSrc: "images/7.png" ,audioSrc: "audio/kolay8.mp3"},
+        { question: "We didn't go swimming yesterday", answer: "Neither did I" ,hintSrc: "images/8.png",audioSrc: "audio/kolay9.mp3"},
+        { question: "He hasn't finished his homework yet", answer: "Neither have I" ,hintSrc: "images/9.png",audioSrc: "audio/kolay10.mp3"},
+        { question: "She can play the piano", answer: "So can I" ,hintSrc: "images/10.png",audioSrc: "audio/kolay11.mp3"},
+        { question: "They aren't attending the conference", answer: " Neither am I" ,hintSrc: "images/11.png",audioSrc: "audio/kolay12.mp3"},
+        { question: "I haven't read that book", answer: "Neither have I",hintSrc: "images/12.png" ,audioSrc: "audio/kolay13.mp3"},
+        { question: "He didn't enjoy the concert", answer: "Neither did I",hintSrc: "images/13.png",audioSrc: "audio/kolay14.mp3" },
+        { question: "We won't be joining the club", answer: "Neither will I",hintSrc: "images/14.png" ,audioSrc: "audio/kolay15.mp3"}
+    ];
+
+    const hardData2 = [
+        { question: "If I _________ (study) harder, I _________ (pass) the exam", answer: "had studied,would have passed",hintSrc: "images/20.png" ,audioSrc: "audio/zor11.mp3"},
+        { question: "If the weather _________ (be) better, we _________ (go) for a picnic", answer: "had been,have gone",hintSrc: "images/21.png" ,audioSrc: "audio/zor22.mp3" },
+        { question: "If you _________ (tell) me earlier, I _________ (help) you", answer: "had told,would have helped" ,hintSrc: "images/22.png",audioSrc: "audio/zor33.mp3" },
+        { question: "If she _________ (practice) more, she _________ (win) the competition", answer: "had practiced,have won",hintSrc: "images/23.png" ,audioSrc: "audio/zor44.mp3" },
+        { question: "If they _________ (leave) earlier, they _________ (avoid) the traffic", answer: "had left,have avoided" ,hintSrc: "images/24.png",audioSrc: "audio/zor55.mp3" },
+        { question: "If I _________ (know) the answer, I _________ (raise) my hand", answer: "had known,would have raised",hintSrc: "images/25.png" ,audioSrc: "audio/zor66.mp3" },
+        { question: "If the flight _________ (not/cancel), we _________ (arrive) on time", answer: "had not been canceled,have arrived" ,hintSrc: "images/26.png" ,audioSrc: "audio/zor77.mp3"},
+        { question: "If the company _________ (invest) in new technology, they _________ (be) more competitive", answer: "had invested,would have been" ,hintSrc: "images/27.png" ,audioSrc: "audio/zor88.mp3"},
+        { question: "If the rain _________ (not/stop), the match _________ (postpone)", answer: "had not stopped,would have been",hintSrc: "images/28.png"  ,audioSrc: "audio/zor9.mp3"}
+    ];
+
+
+    const easyData = [
+        { question: "I like pizza.", answer: "sodoı",hintSrc: "images/0.png",audioSrc: "audio/kolay1.mp3"},
+        { question: "She can speak Spanish", answer: "socanı",hintSrc: "images/1.png",audioSrc: "audio/kolay2.mp3"},
+        { question: "They haven't visited Europe", answer: "neitherhaveı",hintSrc: "images/2.png",audioSrc: "audio/kolay3.mp3" },
+        { question: "He enjoys playing tennis", answer: "sodoı",hintSrc: "images/3.png" ,audioSrc: "audio/kolay4.mp3"},
+        { question: "We won't be going to the party", answer: "neitherwillı" ,hintSrc: "images/4.png",audioSrc: "audio/kolay5.mp3"},
+        { question: "She has never ridden a horse", answer: "neitherhaveı" ,hintSrc: "images/5.png",audioSrc: "audio/kolay6.mp3"},
+        { question: "He didn't watch the movie", answer: "neitherdidı",hintSrc: "images/6.png" ,audioSrc: "audio/kolay7.mp3"},
+        { question: "They don't like spicy food", answer: "neitherdoı",hintSrc: "images/7.png" ,audioSrc: "audio/kolay8.mp3"},
+        { question: "We didn't go swimming yesterday", answer: "neitherdidı" ,hintSrc: "images/8.png",audioSrc: "audio/kolay9.mp3"},
+        { question: "He hasn't finished his homework yet", answer: "neitherhaveı" ,hintSrc: "images/9.png",audioSrc: "audio/kolay10.mp3"},
+        { question: "She can play the piano", answer: "socanı" ,hintSrc: "images/10.png",audioSrc: "audio/kolay11.mp3"},
+        { question: "They aren't attending the conference", answer: "neitheramı" ,hintSrc: "images/11.png",audioSrc: "audio/kolay12.mp3"},
+        { question: "I haven't read that book", answer: "neitherhaveı",hintSrc: "images/12.png" ,audioSrc: "audio/kolay13.mp3"},
+        { question: "He didn't enjoy the concert", answer: "neitherdidı",hintSrc: "images/13.png",audioSrc: "audio/kolay14.mp3" },
+        { question: "We won't be joining the club", answer: "neitherwillı",hintSrc: "images/14.png" ,audioSrc: "audio/kolay15.mp3"}
+    ];
+
+
+
+ const hardData = [
+        { question: "If I _________ (study) harder, I _________ (pass) the exam", answer: "hadstudiedwouldhavepassed",hintSrc: "images/20.png" ,audioSrc: "audio/zor11.mp3"},
+        { question: "If the weather _________ (be) better, we _________ (go) for a picnic", answer: "hadbeenhavegone",hintSrc: "images/21.png" ,audioSrc: "audio/zor22.mp3" },
+        { question: "If you _________ (tell) me earlier, I _________ (help) you", answer: "hadtoldwouldhavehelped" ,hintSrc: "images/22.png",audioSrc: "audio/zor33.mp3" },
+        { question: "If she _________ (practice) more, she _________ (win) the competition", answer: "hadpracticedhavewon",hintSrc: "images/23.png" ,audioSrc: "audio/zor44.mp3" },
+        { question: "If they _________ (leave) earlier, they _________ (avoid) the traffic", answer: "hadlefthaveavoided" ,hintSrc: "images/24.png",audioSrc: "audio/zor55.mp3" },
+        { question: "If I _________ (know) the answer, I _________ (raise) my hand", answer: "hadknownwouldhaveraised",hintSrc: "images/25.png" ,audioSrc: "audio/zor66.mp3" },
+        { question: "If the flight _________ (not/cancel), we _________ (arrive) on time", answer: "hadnotbeencanceledhavearrived" ,hintSrc: "images/26.png" ,audioSrc: "audio/zor77.mp3"},
+        { question: "If the company _________ (invest) in new technology, they _________ (be) more competitive", answer: "hadinvestedwouldhavebeen" ,hintSrc: "images/27.png" ,audioSrc: "audio/zor88.mp3"},
+        { question: "If the rain _________ (not/stop), the match _________ (postpone)", answer: "hadnotstoppedwouldhavebeen",hintSrc: "images/28.png"  ,audioSrc: "audio/zor9.mp3"}
+    ];
+    let selectedData = [];
+    let selectedData2 = [];
+    let currentQuestionIndex = 0;
+    let responseCounter = 0;
+    let levelIndex = 0;
+    document.getElementById('startGameSection').classList.add('hidden');
+    document.getElementById('confirmEntryBtn').addEventListener('click', function() {
+        document.getElementById('confirmEntrySection').classList.add('hidden'); 
+        sendData('a');
+    });
+
+    document.getElementById('confirmEntryBtn').addEventListener('click', function() {
+        document.getElementById('confirmEntrySection').classList.add('hidden'); // GİRİŞİ ONAYLA butonunu gizle
+        document.getElementById('countdownSection').classList.remove('hidden'); // Sayacı göster
+
+        let countdown = 7; 
+        document.getElementById('countdownTimer').textContent = countdown;
+        const intervalId = setInterval(() => {
+            countdown--;
+            document.getElementById('countdownTimer').textContent = countdown;
+            if (countdown === 0) {
+    
+                clearInterval(intervalId);
+                document.getElementById('countdownSection').classList.add('hidden');
+                document.getElementById('startGameSection').classList.remove('hidden');
+            }
+        }, 1000);
+    });
+
+    document.getElementById('startGameBtn').addEventListener('click', function() {
+        this.parentNode.classList.add('hidden');
+        sendData('x');
+        document.getElementById('difficultySection').classList.remove('hidden');
+    });
+
+    document.getElementById('easyBtn').addEventListener('click', function() {
+    selectedData = pickRandomQuestions(easyData, 5);
+    const indexString = selectedData.map((item, index) => easyData.indexOf(item)).join(',');
+    sendDataWithDelay(indexString, 'e', 1000); 
+    showNameEntry();
+    levelIndex = 0;
+});
+
+    document.getElementById('hardBtn').addEventListener('click', function() {
+        selectedData = pickRandomQuestions(hardData, 5);
+    const indexString = selectedData.map((item, index) => hardData.indexOf(item)).join(',');
+    sendDataWithDelay(indexString, 'f', 1000); 
+    showNameEntry();
+    levelIndex = 1;
+    });
+
+    let currentAudio = null; 
+
+function playAudio(audioSrc) {
+    if (currentAudio) {
+        currentAudio.pause(); 
+    }
+    currentAudio = new Audio(audioSrc); 
+    currentAudio.play(); 
+}
+
+function stopAudio() {
+    if (currentAudio) {
+        currentAudio.pause(); 
+        currentAudio = null; 
+    }
+}
+    function showNameEntry() {
+        document.getElementById('difficultySection').classList.add('hidden');
+        document.getElementById('enterNameSection').classList.remove('hidden');
+    }
+
+    function sendDataWithDelay(data1, data2, delay) {
+    sendData(data1); 
+    setTimeout(() => {
+        sendData(data2); 
+    }, delay);
+}
+
+    function pickRandomQuestions(data, count) {
+        let shuffled = data.slice(); 
+        let i = data.length;
+        let temp, index;
+
+      
+        while (i--) {
+            index = Math.floor((i + 1) * Math.random());
+            temp = shuffled[index];
+            shuffled[index] = shuffled[i];
+            shuffled[i] = temp;
+        }
+
+        return shuffled.slice(0, count);
+    }
+    document.getElementById('submitNameBtn').addEventListener('click', function() {
+    const userName = document.getElementById('userName').value;
+    if (userName.length > 0) {
+        document.getElementById('enterNameSection').classList.add('hidden');
+        document.getElementById('countdownSection').classList.remove('hidden'); 
+        sendData(userName);
+        let countdown = 7; 
+        document.getElementById('countdownTimer').textContent = countdown;
+
+        const intervalId = setInterval(() => {
+            countdown--;
+            document.getElementById('countdownTimer').textContent = countdown;
+            if (countdown === 0) {
+                clearInterval(intervalId);
+                document.getElementById('countdownSection').classList.add('hidden'); 
+                startGame(); 
+            }
+        }, 1000);
+    } else {
+        alert("Lütfen isminizi giriniz!");
+    }
+});
+
+    function startGame() {
+    document.getElementById('gameStartingSection').classList.add('hidden');
+    document.getElementById('enterResponseSection').classList.remove('hidden');
+    document.getElementById('hintBtn').classList.add('hidden');
+    showQuestion();
+}
+
+    function showQuestion() {
+        stopAudio();
+      
+        if (currentQuestionIndex >= 5) {
+            endGame();
+        } else if (currentQuestionIndex < selectedData.length) {
+            document.getElementById('questionText').textContent = selectedData[currentQuestionIndex].question;
+        } else {
+            endGame();
+        }
+    }
+    function endGame() {
+        document.getElementById('actionButtonsSection').classList.add('hidden');
+        document.getElementById('endGameSection').classList.remove('hidden');
+    }
+
+    document.getElementById('submitResponseBtn').addEventListener('click', function() {
+    document.getElementById('hintBtn').classList.add('hidden');
+    let userResponse = document.getElementById('userResponse').value.toLowerCase().replace(/[,\s.]/g, ''); // Kullanıcının girdiği cevabı alın ve boşlukları, virgülleri ve noktaları çıkarın
+    if (userResponse !== "") { // Cevap boş değilse devam edin
+        const correctAnswer = selectedData[currentQuestionIndex].answer.trim().toLowerCase(); // Doğru cevabı alın
+        sendData(userResponse); // Cevabı sunucuya gönderin
+        if (userResponse === correctAnswer) {
+            document.getElementById('feedbackText').textContent = "Doğru! Cevap : " +  selectedData[currentQuestionIndex].answer;
+            document.getElementById('feedbackText').style.color = "green";
+            responseCounter++;
+        } else {
+            document.getElementById('feedbackText').textContent = "Yanlış! Doğru cevap: " + selectedData[currentQuestionIndex].answer;
+            document.getElementById('feedbackText').style.color = "red";
+        }
+        currentQuestionIndex++;
+        document.getElementById('enterResponseSection').classList.add('hidden');
+        document.getElementById('actionButtonsSection').classList.remove('hidden');
+        document.getElementById('listenBtn').classList.add('hidden');
+        document.getElementById('userResponse').value = "";
+    } else {
+        alert("Lütfen boş cevap göndermeyin!"); // Boş cevap gönderildiğinde kullanıcıya uyarı verin
+    }
+});
+
+
+document.getElementById('returnToQuestionBtn').addEventListener('click', function() {
+    document.getElementById('hintContainer').classList.add('hidden'); 
+    document.getElementById('hintBtn').classList.add('hidden');
+    sendData('i');
+    this.classList.add('hidden'); 
+});
+
+    document.getElementById('continueBtn').addEventListener('click', function() {
+        if (currentQuestionIndex < selectedData.length) {
+            document.getElementById('actionButtonsSection').classList.add('hidden');
+            document.getElementById('enterResponseSection').classList.remove('hidden');
+            document.getElementById('hintBtn').classList.add('hidden');
+            stopAudio();
+            sendData('b');
+            showQuestion();
+            document.getElementById('hintContainer').classList.add('hidden');
+        } else {
+            stopAudio();
+            sendData('b');
+            endGame();
+        }
+    });
+
+    
+
+
+
+   
+document.getElementById('returnToHomeBtn').addEventListener('click', function() {
+    window.scrollTo(0, 0); 
+    sendData('t');
+    document.getElementById('confirmEntrySection').classList.remove('hidden');
+    document.getElementById('countdownSection').classList.add('hidden');
+    document.getElementById('startGameSection').classList.add('hidden');
+    document.getElementById('difficultySection').classList.add('hidden');
+    document.getElementById('enterNameSection').classList.add('hidden');
+    document.getElementById('gameStartingSection').classList.add('hidden');
+    document.getElementById('enterResponseSection').classList.add('hidden');
+    document.getElementById('hintScreen').classList.add('hidden');
+    document.getElementById('actionButtonsSection').classList.add('hidden');
+    document.getElementById('endGameSection').classList.add('hidden');
+    selectedData = [];
+    currentQuestionIndex = 0;
+    responseCounter = 0;
+});
+
+
+
+
+    function sendData(data) {
+        const formattedData = `userData=${encodeURIComponent(data)}`;
+        fetch('https://deneme102-9b061acedaf9.herokuapp.com/submit-data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formattedData
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log('Veri başarıyla gönderildi:', data);
+        })
+        .catch(error => {
+            console.error('Hata:', error);
+            alert('Bir hata oluştu, lütfen daha sonra tekrar deneyin.');
+        });
+    }
+</script>
+</body>
+</html>
